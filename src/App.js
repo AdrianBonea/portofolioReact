@@ -3,7 +3,8 @@ function App() {
     <div>
       <header>
         <p className="text-xl">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
+          dolor sit amet, consectetur adipiscing elit.
         </p>
       </header>
     </div>
