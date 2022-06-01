@@ -1,14 +1,13 @@
-function App() {
+import Header from "./components/Header";
+import Contact from "./components/Contact";
+import MainContent from "./components/Main";
+
+export default function App() {
   return (
-    <div>
-      <header>
-        <p className="text-xl">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit.
-        </p>
-      </header>
+    <div className="mx-32 font-poppins">
+      <Header />
+      <MainContent />
+      <Contact />
     </div>
   );
 }
-
-export default App;
