@@ -1,15 +1,13 @@
-import Header from "./components/Header";
-import Contact from "./components/Contact";
-import AboutMe from "./components/AboutMe";
-import Projects from "./components/Projects";
+import { Header, Contact, AboutMe, Projects } from "./components";
+import { AppContainer } from "./containers";
 
 export default function App() {
   return (
-    <div className="mx-32 font-poppins">
+    <AppContainer>
       <Header />
       <AboutMe />
       <Projects />
       <Contact />
-    </div>
+    </AppContainer>
   );
 }

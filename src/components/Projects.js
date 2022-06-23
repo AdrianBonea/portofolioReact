@@ -1,20 +1,17 @@
-import React from "react";
+import { useEffect, useState } from "react";
+
+import fromLowerCase from "../utils/fromLowerCase";
+import { getProjects } from "../services/api/coinList";
 
 export default function Projects() {
-  const [latestRepos, setLatestRepos] = React.useState([]);
+  const [latestRepos, setLatestRepos] = useState([]);
 
-  React.useEffect(() => {
-    fetch(
-      "https://api.github.com/search/repositories?q=org:AdrianBonea&sort=updated&order=desc"
-    )
-      .then((res) => res.json())
-      .then((data) => setLatestRepos(data.items))
-      .catch((error) => console.log(error.message));
-  }, []); //fetches the latest repos
-
-  function Capitalize(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  } //capitalizes the first letter of the project name
+  useEffect(() => {
+    //fetches the latest repos
+    getProjects().then((res) => {
+      setLatestRepos(res);
+    });
+  }, []);
 
   console.log(latestRepos);
   return (
@@ -45,7 +42,7 @@ export default function Projects() {
                 {repo.description}
               </p>
               <h2 className="text-2xl mt-2 font-bold pl-10 py-8 border-t-2">
-                {Capitalize(repo.name)}
+                {fromLowerCase(repo.name)}
               </h2>
             </div>
           </a>

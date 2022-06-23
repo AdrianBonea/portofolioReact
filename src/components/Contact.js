@@ -1,29 +1,28 @@
-import React from "react";
-import emailjs from "@emailjs/browser";
+import { useState } from "react";
 import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
+import { send } from "@emailjs/browser";
 
-export default function Contact() {
-  const form = React.useRef();
-  function sendEmail(e) {
+function Contact() {
+  const [toSend, setToSend] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const onSubmit = (e) => {
     e.preventDefault();
+    send("service_unjhlvm", "template_v094kiq", toSend, "aFrlLKuFoGFsCkDrk")
+      .then((response) => {
+        console.log("SUCCESS!", response.status, response.text);
+      })
+      .catch((err) => {
+        console.log("FAILED...", err);
+      });
+  };
 
-    emailjs
-      .sendForm(
-        "service_unjhlvm",
-        "template_v094kiq",
-        form.current,
-        "aFrlLKuFoGFsCkDrk"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
-    e.target.reset();
-  }
+  const handleChange = (e) => {
+    setToSend({ ...toSend, [e.target.name]: e.target.value });
+  };
 
   return (
     <section className="flex py-40 ml-40" id="contact">
@@ -57,8 +56,7 @@ export default function Contact() {
           </div>
         </div>
         <form
-          ref={form}
-          onSubmit={sendEmail}
+          onSubmit={onSubmit}
           className="flex flex-col text-[#2D1863] rounded-lg w-[50vh]"
         >
           <h1 className="mx-10 mt-10 text-2xl font-bold">Send me an email</h1>
@@ -67,6 +65,8 @@ export default function Contact() {
             type="text"
             name="name"
             placeholder=" Your name"
+            value={toSend.name}
+            onChange={handleChange}
             className="mx-10 bg-[#EEF7FF] border-transparent 
                         rounded focus:border-transparent focus:ring-0"
           />
@@ -74,20 +74,24 @@ export default function Contact() {
           <input
             type="email"
             name="email"
+            value={toSend.email}
+            onChange={handleChange}
             placeholder=" youare.the.best@email.com"
             className="mx-10 bg-[#EEF7FF] border-transparent 
                         rounded focus:border-transparent focus:ring-0"
           />
           <label className="mx-10 mt-5 mb-1">Message *</label>
           <textarea
+            type="text"
             name="message"
             placeholder=" Write me a message"
+            value={toSend.message}
+            onChange={handleChange}
             className="mx-10 bg-[#EEF7FF] border-transparent 
                             rounded focus:border-transparent focus:ring-0"
           />
           <button
             type="submit"
-            value="Send"
             className="my-10 mx-10 py-4 bg-[#6F34FE] 
             text-white rounded-full 
             transition duration-500 ease-in-out 
@@ -100,3 +104,5 @@ export default function Contact() {
     </section>
   );
 }
+
+export default Contact;
