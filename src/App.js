@@ -1,13 +1,13 @@
-function App() {
+import { Header, Contact, AboutMe, Projects } from "./components";
+import { AppContainer } from "./containers";
+
+export default function App() {
   return (
-    <div>
-      <header>
-        <p className="text-xl">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </p>
-      </header>
-    </div>
+    <AppContainer>
+      <Header />
+      <AboutMe />
+      <Projects />
+      <Contact />
+    </AppContainer>
   );
 }
-
-export default App;
